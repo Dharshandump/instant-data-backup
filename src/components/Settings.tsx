@@ -26,9 +26,10 @@ interface Device {
 
 interface SettingsProps {
   onNavigate?: (view: string) => void;
+  onShowUpgrade?: () => void;
 }
 
-export function Settings({ onNavigate }: SettingsProps) {
+export function Settings({ onNavigate, onShowUpgrade }: SettingsProps) {
   const [activeTab, setActiveTab] = useState('backup');
   const [autoSync, setAutoSync] = useState(true);
   const [syncFrequency, setSyncFrequency] = useState('hourly');
@@ -353,10 +354,10 @@ export function Settings({ onNavigate }: SettingsProps) {
   );
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 animate-fade-in-up">
+    <div className="max-w-6xl mx-auto space-y-8">
       {/* Tab Navigation */}
-      <div className="card-glass">
-        <div className="border-b border-white/10">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div className="border-b border-gray-200 dark:border-gray-700">
           <nav className="flex space-x-8 px-8" aria-label="Tabs">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -366,8 +367,8 @@ export function Settings({ onNavigate }: SettingsProps) {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center space-x-2 py-6 px-1 border-b-2 font-semibold text-sm transition-all ${
                     activeTab === tab.id
-                      ? 'border-blue-400 text-blue-400'
-                      : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
+                      ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                      : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -390,7 +391,7 @@ export function Settings({ onNavigate }: SettingsProps) {
       <div className="flex justify-end">
         <button
           onClick={handleSaveSettings}
-          className="btn-primary px-8 py-3 font-semibold"
+          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
         >
           <Save className="h-5 w-5 mr-2" />
           Save Changes

@@ -23,15 +23,15 @@ export function Notifications() {
   const getBackgroundColor = (type: string) => {
     switch (type) {
       case 'success':
-        return 'bg-emerald-50 border-emerald-200';
+        return 'notification-success border';
       case 'warning':
-        return 'bg-amber-50 border-amber-200';
+        return 'notification-warning border';
       case 'error':
-        return 'bg-red-50 border-red-200';
+        return 'notification-error border';
       case 'info':
-        return 'bg-blue-50 border-blue-200';
+        return 'notification-info border';
       default:
-        return 'bg-blue-50 border-blue-200';
+        return 'notification-info border';
     }
   };
 
@@ -42,7 +42,7 @@ export function Notifications() {
       {notifications.map((notification) => (
         <div
           key={notification.id}
-          className={`max-w-sm w-full p-4 rounded-lg border shadow-lg ${getBackgroundColor(notification.type)} animate-in slide-in-from-right duration-300`}
+          className={`max-w-sm w-full p-4 rounded-xl shadow-lg ${getBackgroundColor(notification.type)} animate-slide-in-right backdrop-blur-sm`}
         >
           <div className="flex items-start space-x-3">
             <div className="flex-shrink-0">
@@ -50,19 +50,19 @@ export function Notifications() {
             </div>
             
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium">
                 {notification.message}
               </p>
-              <p className="text-xs text-gray-600 mt-1">
+              <p className="text-xs opacity-75 mt-1">
                 {notification.timestamp.toLocaleTimeString()}
               </p>
             </div>
             
             <button
               onClick={() => removeNotification(notification.id)}
-              className="flex-shrink-0 p-1 rounded-full hover:bg-white/50 transition-colors"
+              className="flex-shrink-0 p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
             >
-              <X className="h-4 w-4 text-gray-500" />
+              <X className="h-4 w-4 opacity-60 hover:opacity-100" />
             </button>
           </div>
         </div>
